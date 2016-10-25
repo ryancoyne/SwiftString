@@ -243,6 +243,14 @@ class SwiftStringTests: XCTestCase {
 		XCTAssertEqual(s.substring(4,length: 9), "stupid br", "trimmed is invalid")
 	}
 
+
+	func testBase64() {
+		let str = "hello:world"
+		let encoded = str.toBase64()
+		let decoded = encoded.fromBase64()
+		XCTAssertEqual(str, decoded, "Base64 does not match")
+	}
+
 	static var allTests : [(String, (SwiftStringTests) -> () throws -> Void)] {
 		return [
 			("testBetween", testBetween),
