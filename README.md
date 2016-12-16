@@ -358,6 +358,8 @@ Andrew Mayne, andrew@redbricklab.com
 
 Swift 3 SPM module, Jonathan Guthrie, jono@guthrie.net.nz
 
+Cocoapods, Koji Murata, malt.koji@gmail.com
+
 ## License
 
 SwiftString is available under the MIT license. See the LICENSE file for more info.
