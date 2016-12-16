@@ -1,9 +1,5 @@
-This repository was forked from [https://github.com/iamjono/SwiftString](https://github.com/iamjono/SwiftString).
-I made it usable with cocoapods.
-
 # SwiftString
 
-[![CI Status](http://img.shields.io/travis/malt03/SwiftString.svg?style=flat)](https://travis-ci.org/malt03/SwiftString)
 [![Version](https://img.shields.io/cocoapods/v/SwiftString3.svg?style=flat)](http://cocoapods.org/pods/SwiftString3)
 [![License](https://img.shields.io/cocoapods/l/SwiftString3.svg?style=flat)](http://cocoapods.org/pods/SwiftString3)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftString3.svg?style=flat)](http://cocoapods.org/pods/SwiftString3)
