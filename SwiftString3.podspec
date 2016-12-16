@@ -18,14 +18,14 @@ This library was motivated by having to search StackOverflow for common string o
 Note the original client side Swift 2 repo can be found here: https://github.com/amayne/SwiftString
                        DESC
 
-  s.homepage         = 'https://github.com/malt03/SwiftString'
+  s.homepage         = 'https://github.com/iamjono/SwiftString'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.authors          = {
     "Andrew Mayne" => "andrew@redbricklab.com",
     "Jonathan Guthrie" => "jono@guthrie.net.nz",
     "Koji Murata" => 'malt.koji@gmail.com'
   }
-  s.source           = { :git => 'https://github.com/malt03/SwiftString.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/iamjono/SwiftString.git', :tag => s.version.to_s }
 
   s.requires_arc = true
   s.ios.deployment_target = '8.0'
