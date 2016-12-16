@@ -1,4 +1,13 @@
+This repository was forked from [https://github.com/iamjono/SwiftString](https://github.com/iamjono/SwiftString).
+I made it usable with cocoapods.
+
 # SwiftString
+
+[![CI Status](http://img.shields.io/travis/malt03/SwiftString.svg?style=flat)](https://travis-ci.org/malt03/SwiftString)
+[![Version](https://img.shields.io/cocoapods/v/SwiftString3.svg?style=flat)](http://cocoapods.org/pods/SwiftString3)
+[![License](https://img.shields.io/cocoapods/l/SwiftString3.svg?style=flat)](http://cocoapods.org/pods/SwiftString3)
+[![Platform](https://img.shields.io/cocoapods/p/SwiftString3.svg?style=flat)](http://cocoapods.org/pods/SwiftString3)
+![Language](https://img.shields.io/badge/language-Swift%203.0-orange.svg)
 
 SwiftString is a lightweight string extension for Swift 3.
 This library was motivated by having to search StackOverflow for common string operations,
@@ -6,7 +15,6 @@ and wanting them to be in one place with test coverage.
 
 Note the original client side Swift 2 repo can be found here:
 [https://github.com/amayne/SwiftString](https://github.com/amayne/SwiftString)
-
 
 ## This Fork
 
@@ -349,6 +357,8 @@ swift package generate-xcodeproj
 Andrew Mayne, andrew@redbricklab.com
 
 Swift 3 SPM module, Jonathan Guthrie, jono@guthrie.net.nz
+
+Cocoapods, Koji Murata, malt.koji@gmail.com
 
 ## License
 
