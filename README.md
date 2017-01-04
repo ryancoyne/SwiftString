@@ -14,10 +14,10 @@ Note the original client side Swift 2 repo can be found here:
 
 ## This Fork
 
-This fork is intended as a server side utility. 
+This fork is intended as a server side utility.
 
 * It is Swift 3.0 and Swift Package Manager (SPM) ready.
-* Added sigificant test coverage 
+* Added sigificant test coverage
 
 
 ## Usage
@@ -70,6 +70,19 @@ import SwiftString
 "foobar".chompRight("foo") // "bar"
 ```
 
+**cleanPath()**
+
+```swift
+var foo = "hello//world/..///stuff.txt"
+foo.cleanPath() // foo == "hello/stuff.txt"
+```
+
+**cleanedPath()**
+
+```swift
+"hello//world/..///stuff.txt".cleanedPath() // "hello/stuff.txt"
+```
+
 **collapseWhitespace()**
 
 ```swift
@@ -109,6 +122,36 @@ import SwiftString
 ```swift
 "subdir/".ensureRight("/") // "subdir/"
 "subdir".ensureRight("/") // "subdir/"
+```
+
+**extension**
+
+```swift
+"/hello/world.txt".extension // "txt"
+"/hello/world.tmp.txt".extension // "txt"
+```
+
+**file**
+
+```swift
+"/hello/world.txt".file // "world.txt"
+"/hello/there/".file // "there"
+```
+
+**fileName**
+
+```swift
+"/hello/world.txt".fileName // "world"
+"/hello/there/".fileName // "there"
+```
+
+**index(of: substring)**
+
+```swift
+"hello".index(of: "hell"), // 0
+"hello".index(of: "lo"), // 3
+"hello".index(of: "world") // -1
+"hellohello".index(of: "hel", after: 2) // 5
 ```
 
 **indexOf(substring)**
@@ -173,6 +216,32 @@ import SwiftString
 "-63.0".isNumeric() // true
 ```
 
+**join(paths...)**
+
+```swift
+var root = "/foo"
+root.join("bar", "/baz", "..", "//somedata.txt") // root == "/foo/bar/somedata.txt"
+
+var root = "/foo"
+root.join(paths: ["bar", "/baz", "..", "//somedata.txt"]) // root == "/foo/bar/somedata.txt"
+```
+
+**joining(paths...)**
+
+```swift
+"/foo".joining("bar", "/baz", "..", "//somedata.txt") // "/foo/bar/somedata.txt"
+"/foo".joining(paths: ["bar", "/baz", "..", "//somedata.txt"]) // "/foo/bar/somedata.txt"
+```
+
+**lastIndex(of: substring)**
+
+```swift
+"hellohellohello".lastIndex(of: "hell"), // 10
+"hellohellohello".lastIndex(of: "lo"), // 13
+"hellohellohello".lastIndex(of: "world") // -1
+"hellohellohello".index(of: "hel", before: 10) // 5
+```
+
 **latinize()**
 
 ```swift
@@ -207,6 +276,13 @@ import SwiftString
 ```swift
 "hello".padRight(10) // "hello          "
 "hello".padRight(2, "!") // "hello!!"
+```
+
+**parent**
+
+```swift
+"/hello/there/world.txt".parent // "/hello/there"
+"/hello/there".parent // "/hello"
 ```
 
 **startsWith(prefix)**
@@ -336,7 +412,7 @@ import SwiftString
 
 ``` swift
 .Package(
-    url: "https://github.com/iamjono/SwiftString.git", 
+    url: "https://github.com/iamjono/SwiftString.git",
     majorVersion: 1, minor: 0
     ),
 ```
