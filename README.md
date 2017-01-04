@@ -239,7 +239,7 @@ root.join(paths: ["bar", "/baz", "..", "//somedata.txt"]) // root == "/foo/bar/s
 "hellohellohello".lastIndex(of: "hell"), // 10
 "hellohellohello".lastIndex(of: "lo"), // 13
 "hellohellohello".lastIndex(of: "world") // -1
-"hellohellohello".index(of: "hel", before: 10) // 5
+"hellohellohello".lastIndex(of: "hel", before: 10) // 5
 ```
 
 **latinize()**
