@@ -108,6 +108,7 @@ public extension String {
         }
     }
     
+    @available(*, deprecated, message: "Use `index(of:)` instead")
     func indexOf(_ substring: String) -> Int? {
         if let range = range(of: substring) {
 			return self.distance(from: startIndex, to: range.lowerBound)
@@ -282,7 +283,7 @@ public extension String {
     subscript(r: Range<Int>) -> String {
         get {
             let startIndex = self.characters.index(self.startIndex, offsetBy: r.lowerBound)
-            let endIndex = self.characters.index(self.startIndex, offsetBy: r.upperBound - r.lowerBound)
+            let endIndex = self.characters.index(self.startIndex, offsetBy: r.upperBound)
             return self[startIndex..<endIndex]
         }
     }
@@ -308,6 +309,50 @@ public extension String {
 //	func right(_ range:Range<String.Index>?) -> String {
 //		return self.substring(from: self.index((range?.lowerBound)!, offsetBy:1))
 //	}
+	
+	/// The first index of the given string
+	public func indexRaw(of str: String, after: Int = 0, options: String.CompareOptions = .literal, locale: Locale? = nil) -> String.Index? {
+		guard str.length > 0 else {
+			// Can't look for nothing
+			return nil
+		}
+		guard (str.length + after) <= self.length else {
+			// Make sure the string you're searching for will actually fit
+			return nil
+		}
+		
+		let startRange = self.index(self.startIndex, offsetBy: after)..<self.endIndex
+		return self.range(of: str, options: options.removing(.backwards), range: startRange, locale: locale)?.lowerBound
+	}
+	
+	public func index(of str: String, after: Int = 0, options: String.CompareOptions = .literal, locale: Locale? = nil) -> Int {
+		guard let index = indexRaw(of: str, after: after, options: options, locale: locale) else {
+			return -1
+		}
+		return self.distance(from: self.startIndex, to: index)
+	}
+	
+	/// The last index of the given string
+	public func lastIndexRaw(of str: String, before: Int = 0, options: String.CompareOptions = .literal, locale: Locale? = nil) -> String.Index? {
+		guard str.length > 0 else {
+			// Can't look for nothing
+			return nil
+		}
+		guard (str.length + before) <= self.length else {
+			// Make sure the string you're searching for will actually fit
+			return nil
+		}
+		
+		let startRange = self.startIndex..<self.index(self.endIndex, offsetBy: -before)
+		return self.range(of: str, options: options.inserting(.backwards), range: startRange, locale: locale)?.lowerBound
+	}
+	
+	public func lastIndex(of str: String, before: Int = 0, options: String.CompareOptions = .literal, locale: Locale? = nil) -> Int {
+		guard let index = lastIndexRaw(of: str, before: before, options: options, locale: locale) else {
+			return -1
+		}
+		return self.distance(from: self.startIndex, to: index)
+	}
 
 }
 
@@ -363,6 +408,23 @@ private func localeNumberFormatter(_ locale: Locale) -> NumberFormatter {
         nf.locale = locale
         return nf
     }())
+}
+
+/// Add the `inserting` and `removing` functions
+private extension OptionSet where Element == Self {
+	/// Duplicate the set and insert the given option
+	func inserting(_ newMember: Self) -> Self {
+		var opts = self
+		opts.insert(newMember)
+		return opts
+	}
+	
+	/// Duplicate the set and remove the given option
+	func removing(_ member: Self) -> Self {
+		var opts = self
+		opts.remove(member)
+		return opts
+	}
 }
 
 public extension String {
