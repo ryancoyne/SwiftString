@@ -154,7 +154,7 @@ foo.cleanPath() // foo == "hello/stuff.txt"
 "hellohello".index(of: "hel", after: 2) // 5
 ```
 
-**indexOf(substring)**
+**indexOf(substring)** - deprecated in favor of `index(of:)` above
 
 ```swift
 "hello".indexOf("hell"), // 0
