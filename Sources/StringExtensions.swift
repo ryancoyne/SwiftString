@@ -280,11 +280,40 @@ public extension String {
         return self.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
-    subscript(r: Range<Int>) -> String {
+    subscript(_ r: CountableRange<Int>) -> String {
         get {
             let startIndex = self.characters.index(self.startIndex, offsetBy: r.lowerBound)
             let endIndex = self.characters.index(self.startIndex, offsetBy: r.upperBound)
             return self[startIndex..<endIndex]
+        }
+    }
+    
+    subscript(_ range: CountableClosedRange<Int>) -> String {
+        get {
+            return self[range.lowerBound..<range.upperBound + 1]
+        }
+    }
+    
+    subscript(safe range: CountableRange<Int>) -> String {
+        get {
+            if length == 0 { return "" }
+            let lower = range.lowerBound < 0 ? 0 : range.lowerBound
+            let upper = range.upperBound < 0 ? 0 : range.upperBound
+            let s = index(startIndex, offsetBy: lower, limitedBy: endIndex) ?? endIndex
+            let e = index(startIndex, offsetBy: upper, limitedBy: endIndex) ?? endIndex
+            return self[s..<e]
+        }
+    }
+    
+    subscript(safe range: CountableClosedRange<Int>) -> String {
+        get {
+            if length == 0 { return "" }
+            let closedEndIndex = index(endIndex, offsetBy: -1, limitedBy: startIndex) ?? startIndex
+            let lower = range.lowerBound < 0 ? 0 : range.lowerBound
+            let upper = range.upperBound < 0 ? 0 : range.upperBound
+            let s = index(startIndex, offsetBy: lower, limitedBy: closedEndIndex) ?? closedEndIndex
+            let e = index(startIndex, offsetBy: upper, limitedBy: closedEndIndex) ?? closedEndIndex
+            return self[s...e]
         }
     }
     
