@@ -425,6 +425,11 @@ Then, regenerate your Xcode project:
 swift package generate-xcodeproj
 ```
 
+### Install via Cocoapods
+
+```ruby
+pod "String+Extensions"
+```
 
 ## Author
 
