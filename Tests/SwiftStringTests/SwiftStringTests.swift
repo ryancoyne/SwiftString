@@ -242,7 +242,30 @@ class SwiftStringTests: XCTestCase {
 		let s = "The stupid brown fox"
 		XCTAssertEqual(s.substring(4,length: 9), "stupid br", "trimmed is invalid")
 	}
-
+    //subscript
+    func testsubscript() {
+        let s = "0123456789"
+        XCTAssertEqual(s[4..<9], "45678", "subscript is invalid")
+        XCTAssertEqual(s[4...8], "45678", "subscript is invalid")
+    }
+    //safesubscript
+    func testsafesubscript() {
+        let s = "0123456789"
+        XCTAssertEqual(s[safe: 1 ..< 6], "12345", "safesubscript is invalid")
+        XCTAssertEqual(s[safe: 1 ... 6], "123456", "safesubscript is invalid")
+        XCTAssertEqual(s[safe: 7 ..< 100], "789", "safesubscript is invalid")
+        XCTAssertEqual(s[safe: 7 ... 100], "789", "safesubscript is invalid")
+        XCTAssertEqual(s[safe: -100 ..< 2], "01", "safesubscript is invalid")
+        XCTAssertEqual(s[safe: -100 ... 2], "012", "safesubscript is invalid")
+        XCTAssertEqual(s[safe: -100 ..< 100], "0123456789", "safesubscript is invalid")
+        XCTAssertEqual(s[safe: -100 ... 100], "0123456789", "safesubscript is invalid")
+        XCTAssertEqual(s[safe: -100 ..< -20], "", "safesubscript is invalid")
+        XCTAssertEqual(s[safe: -100 ... -20], "0", "safesubscript is invalid")
+        XCTAssertEqual(s[safe: 20 ..< 100], "", "safesubscript is invalid")
+        XCTAssertEqual(s[safe: 20 ... 100], "9", "safesubscript is invalid")
+        XCTAssertEqual(""[safe: 20 ..< 100], "", "safesubscript is invalid")
+        XCTAssertEqual(""[safe: 20 ... 100], "", "safesubscript is invalid")
+    }
 
 	func testBase64() {
 		let str = "hello:world"
@@ -287,7 +310,9 @@ class SwiftStringTests: XCTestCase {
 			("testtrimmedLeft", testtrimmedLeft),
 			("testtrimmedRight", testtrimmedRight),
 			("testtrimmed", testtrimmed),
-			("testsubstring", testsubstring)
+			("testsubstring", testsubstring),
+			("testsubscript", testsubscript),
+			("testsafesubscript", testsafesubscript),
 		]
 	}
 
