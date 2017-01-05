@@ -398,6 +398,8 @@ root.join(paths: ["bar", "/baz", "..", "//somedata.txt"]) // root == "/foo/bar/s
 "hello world"[0..<1] // "h"
 "hello world"[0] // "h"
 "hello world"[0...10] // "hello world"
+"hello world"[safe: -1...1] // "he"
+"hello world"[safe: 9...20] // "ld"
 ```
 
 ## Requirements
