@@ -1,5 +1,5 @@
 #
-# Be sure to run `pod lib lint SwiftString3.podspec' to ensure this is a
+# Be sure to run `pod lib lint String+Extensions.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -7,12 +7,12 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'SwiftString3'
-  s.version          = '1.0.11'
+  s.name             = 'String+Extensions'
+  s.version          = '1.1.0'
   s.summary          = 'A lightweight string extension for Swift'
 
   s.description      = <<-DESC
-SwiftString is a lightweight string extension for Swift 3.
+String+Extensions is a lightweight string extension for Swift 3.
 This library was motivated by having to search StackOverflow for common string operations, and wanting them to be in one place with test coverage.
 
 Note the original client side Swift 2 repo can be found here: https://github.com/amayne/SwiftString
