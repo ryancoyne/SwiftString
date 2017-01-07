@@ -219,4 +219,19 @@ class StringURLTests: XCTestCase {
 		let base2 = "/foo/bar/"
 		XCTAssertEqual(base2.joining(paths: ["baz/", "..", "//data.txt"]), "/foo/bar/data.txt")
 	}
+	
+	static var allTests : [(String, (SwiftStringTests) -> () throws -> Void)] {
+		return [
+			("testParent", testParent),
+			("testFile", testFile),
+			("testFileName", testFileName),
+			("testExtension", testExtension),
+			("testCleanPath", testCleanPath),
+			("testCleanedPath", testCleanedPath),
+			("testJoinVararg", testJoinVararg),
+			("testJoinArray", testJoinArray),
+			("testJoiningVararg", testJoiningVararg),
+			("testJoiningArray", testJoiningArray),
+		]
+	}
 }
