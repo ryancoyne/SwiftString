@@ -8,7 +8,7 @@
 
 import Foundation
 
-private let parentBacktrackRegex = try! NSRegularExpression(pattern: "([^/]*)?\\/+\\.\\.", options: [])
+private let parentBacktrackRegex = "([^/]*)?\\/+\\.\\."
 extension String {
 	/// The parent directory or url
 	/// i.e. calling `"/foo/bar/baz".parent` will return `"/foo/bar"`
@@ -80,11 +80,9 @@ extension String {
 			str = str.replacingOccurrences(of: "//", with: "/")
 		}
 		// Parse `..`s
-		while let match = parentBacktrackRegex.firstMatch(in: str, options: [], range: NSMakeRange(0, str.length)) {
-			let min = str.index(str.startIndex, offsetBy: match.range.location)
-			let max = str.index(str.startIndex, offsetBy: match.range.location + match.range.length)
-			str.removeSubrange(min..<max)
-			
+		while let range = str.range(of: parentBacktrackRegex, options: .regularExpression) {
+			str.removeSubrange(range)
+		
 			while str.contains("//") {
 				str = str.replacingOccurrences(of: "//", with: "/")
 			}
