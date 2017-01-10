@@ -1,8 +1,8 @@
 # SwiftString
 
-[![Version](https://img.shields.io/cocoapods/v/SwiftString3.svg?style=flat)](http://cocoapods.org/pods/SwiftString3)
-[![License](https://img.shields.io/cocoapods/l/SwiftString3.svg?style=flat)](http://cocoapods.org/pods/SwiftString3)
-[![Platform](https://img.shields.io/cocoapods/p/SwiftString3.svg?style=flat)](http://cocoapods.org/pods/SwiftString3)
+[![Version](https://img.shields.io/cocoapods/v/String+Extensions.svg?style=flat)](http://cocoapods.org/pods/String+Extensions)
+[![License](https://img.shields.io/cocoapods/l/String+Extensions.svg?style=flat)](http://cocoapods.org/pods/String+Extensions)
+[![Platform](https://img.shields.io/cocoapods/p/String+Extensions.svg?style=flat)](http://cocoapods.org/pods/String+Extensions)
 ![Language](https://img.shields.io/badge/language-Swift%203.0-orange.svg)
 
 SwiftString is a lightweight string extension for Swift 3.
@@ -425,6 +425,11 @@ Then, regenerate your Xcode project:
 swift package generate-xcodeproj
 ```
 
+### Install via Cocoapods
+
+```ruby
+pod "String+Extensions"
+```
 
 ## Author
 
