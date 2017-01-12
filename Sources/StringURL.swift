@@ -9,7 +9,7 @@
 import Foundation
 
 private let parentBacktrackRegex = "([^/]*)?\\/+\\.\\."
-extension String {
+public extension String {
 	/// The parent directory or url
 	/// i.e. calling `"/foo/bar/baz".parent` will return `"/foo/bar"`
 	public var parent: String? {
