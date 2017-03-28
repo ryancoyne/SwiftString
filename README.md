@@ -19,7 +19,7 @@ This fork is intended as a server side utility.
 * It is Swift 3.x and Swift Package Manager (SPM) ready.
 * Added sigificant test coverage
 
-## Swift 3.0.2
+## Swift 3.0.2 and 3.1
 
 Please use the majorVersion:1 in your Package.swift file
 
@@ -27,14 +27,7 @@ Please use the majorVersion:1 in your Package.swift file
 .Package(url: "https://github.com/iamjono/SwiftString.git", majorVersion: 1),
 ```
 
-## Swift 3.1 
-
-Please use majorVersion:2 in your Package.swift file
-
-``` swift
-.Package(url: "https://github.com/iamjono/SwiftString.git", majorVersion: 2),
-```
-
+The latest release works for both Swift 3.0.2 and 3.1, on macOS and Linux.
 
 
 ## Usage
