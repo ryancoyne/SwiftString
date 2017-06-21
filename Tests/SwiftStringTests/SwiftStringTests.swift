@@ -75,8 +75,8 @@ class SwiftStringTests: XCTestCase {
 	//indexOf
 	func testindexOf() {
 		let s = "The stupid brøwn føx"
-		XCTAssertEqual(s.indexOf("s"), 4, "indexOf is invalid")
-		XCTAssertNotEqual(s.indexOf("s"), 7, "indexOf is invalid")
+		XCTAssertEqual(s.index(of:"s"), 4, "indexOf is invalid")
+		XCTAssertNotEqual(s.index(of:"s"), 7, "indexOf is invalid")
 	}
 	//initials
 	func testinitials() {
