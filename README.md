@@ -1,7 +1,7 @@
 # SwiftString
 
 [![Version](https://img.shields.io/cocoapods/v/String+Extensions.svg?style=flat)](http://cocoapods.org/pods/String+Extensions)
-[![License](https://img.shields.io/cocoapods/l/String+Extensions.svg?style=flat)](http://cocoapods.org/pods/String+Extensions)[![Language](https://img.shields.io/badge/language-Swift%203.0-orange.svg)[![Language](https://img.shields.io/badge/language-Swift%204.0-orange.svg)
+[![License](https://img.shields.io/cocoapods/l/String+Extensions.svg?style=flat)](http://cocoapods.org/pods/String+Extensions) ![Language](https://img.shields.io/badge/language-Swift%203.0-orange.svg) ![Language](https://img.shields.io/badge/language-Swift%204.0-orange.svg)
 
 
 SwiftString is a lightweight string extension for Swift 3 and 4.
