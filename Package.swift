@@ -5,6 +5,6 @@ let package = Package(
     name: "SwiftString",
     targets: [],
     dependencies: [],
-	swiftLanguageVersions: [3, 4],
+	swiftLanguageVersions: [3],
     exclude: []
 )
