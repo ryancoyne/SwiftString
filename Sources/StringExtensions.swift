@@ -8,7 +8,18 @@
 import Foundation
 
 public extension String {
-
+    
+    
+    /// Get a array of strings from a string list separated by new lines and/or returns
+    /// This has the distinct advantage over the previous version of simultaneously handling \n and \r\n
+    ///
+    /// - returns: an array of strings
+    var lines: [String] {
+        var result: [String] = []
+        enumerateLines { line, _ in result.append(line) }
+        return result
+    }
+    
     ///  Finds the string between two bookend strings if it can be found.
     ///
     ///  - parameter left:  The left bookend
@@ -18,24 +29,24 @@ public extension String {
     func between(_ left: String, _ right: String) -> String? {
         guard
             let leftRange = range(of:left), let rightRange = range(of: right, options: .backwards),
-				left != right && leftRange.upperBound != rightRange.lowerBound
+            left != right && leftRange.upperBound != rightRange.lowerBound
             else { return nil }
-
-		return self[leftRange.upperBound...index(before: rightRange.lowerBound)]
-
+        
+        return self[leftRange.upperBound...index(before: rightRange.lowerBound)]
+        
     }
     
     // https://gist.github.com/stevenschobert/540dd33e828461916c11
     func camelize() -> String {
         let source = clean(with: " ", allOf: "-", "_")
         if source.characters.contains(" ") {
-			let first = self[self.startIndex...self.index(after: startIndex)] //source.substringToIndex(source.index(after: startIndex))
-			let cammel = source.capitalized.replacingOccurrences(of: " ", with: "")
-//            let cammel = String(format: "%@", strip)
+            let first = self[self.startIndex...self.index(after: startIndex)] //source.substringToIndex(source.index(after: startIndex))
+            let cammel = source.capitalized.replacingOccurrences(of: " ", with: "")
+            //            let cammel = String(format: "%@", strip)
             let rest = String(cammel.characters.dropFirst())
             return "\(first)\(rest)"
         } else {
-			let first = source[self.startIndex...self.index(after: startIndex)].lowercased()
+            let first = source[self.startIndex...self.index(after: startIndex)].lowercased()
             let rest = String(source.characters.dropFirst())
             return "\(first)\(rest)"
         }
@@ -45,10 +56,10 @@ public extension String {
         return capitalized
     }
     
-//    func contains(_ substring: String) -> Bool {
-//        return range(of: substring) != nil
-//    }
-
+    //    func contains(_ substring: String) -> Bool {
+    //        return range(of: substring) != nil
+    //    }
+    
     func chompLeft(_ prefix: String) -> String {
         if let prefixRange = range(of: prefix) {
             if prefixRange.upperBound >= endIndex {
@@ -61,7 +72,7 @@ public extension String {
     }
     
     func chompRight(_ suffix: String) -> String {
-		if let suffixRange = range(of: suffix, options: .backwards) {
+        if let suffixRange = range(of: suffix, options: .backwards) {
             if suffixRange.upperBound >= endIndex {
                 return self[startIndex..<suffixRange.lowerBound]
             } else {
@@ -111,20 +122,20 @@ public extension String {
     @available(*, deprecated, message: "Use `index(of:)` instead")
     func indexOf(_ substring: String) -> Int? {
         if let range = range(of: substring) {
-			return self.distance(from: startIndex, to: range.lowerBound)
-//            return startIndex.distanceTo(range.lowerBound)
+            return self.distance(from: startIndex, to: range.lowerBound)
+            //            return startIndex.distanceTo(range.lowerBound)
         }
         return nil
     }
     
     func initials() -> String {
         let words = self.components(separatedBy: " ")
-		return words.reduce(""){$0 + $1[startIndex...startIndex]}
-//		return words.reduce(""){$0 + $1[0...0]}
+        return words.reduce(""){$0 + $1[startIndex...startIndex]}
+        //		return words.reduce(""){$0 + $1[0...0]}
     }
     
     func initialsFirstAndLast() -> String {
-		let words = self.components(separatedBy: " ")
+        let words = self.components(separatedBy: " ")
         return words.reduce("") { ($0 == "" ? "" : $0[startIndex...startIndex]) + $1[startIndex...startIndex]}
     }
     
@@ -139,14 +150,14 @@ public extension String {
     
     func isAlphaNumeric() -> Bool {
         let alphaNumeric = NSCharacterSet.alphanumerics
-		let output = self.unicodeScalars.split { !alphaNumeric.contains($0)}.map(String.init)
-		if output.count == 1 {
-			if output[0] != self {
-				return false
-			}
-		}
-		return output.count == 1
-//        return componentsSeparatedByCharactersInSet(alphaNumeric).joinWithSeparator("").length == 0
+        let output = self.unicodeScalars.split { !alphaNumeric.contains($0)}.map(String.init)
+        if output.count == 1 {
+            if output[0] != self {
+                return false
+            }
+        }
+        return output.count == 1
+        //        return componentsSeparatedByCharactersInSet(alphaNumeric).joinWithSeparator("").length == 0
     }
     
     func isEmpty() -> Bool {
@@ -163,14 +174,10 @@ public extension String {
     private func join<S: Sequence>(_ elements: S) -> String {
         return elements.map{String(describing: $0)}.joined(separator: self)
     }
-
+    
     func latinize() -> String {
         return self.folding(options: .diacriticInsensitive, locale: .current)
-//		stringByFoldingWithOptions(.DiacriticInsensitiveSearch, locale: NSLocale.currentLocale())
-    }
-    
-    func lines() -> [String] {
-        return self.components(separatedBy: NSCharacterSet.newlines)
+        //		stringByFoldingWithOptions(.DiacriticInsensitiveSearch, locale: NSLocale.currentLocale())
     }
     
     var length: Int {
@@ -199,12 +206,12 @@ public extension String {
             .filter { $0 != "" }
             .joined(separator: String(separator))
     }
-
-	/// split the string into a string array by white spaces
-	func tokenize() -> [String] {
-		return self.components(separatedBy: .whitespaces)
-	}
-
+    
+    /// split the string into a string array by white spaces
+    func tokenize() -> [String] {
+        return self.components(separatedBy: .whitespaces)
+    }
+    
     func split(_ separator: Character = " ") -> [String] {
         return characters.split{$0 == separator}.map(String.init)
     }
@@ -212,7 +219,7 @@ public extension String {
     func startsWith(_ prefix: String) -> Bool {
         return hasPrefix(prefix)
     }
-
+    
     func stripPunctuation() -> String {
         return components(separatedBy: .punctuationCharacters)
             .joined(separator: "")
@@ -238,22 +245,22 @@ public extension String {
         }
         return nil
     }
-        
+    
     func toBool() -> Bool? {
         let trimmed = self.trimmed().lowercased()
-		if Int(trimmed) != 0 {
-			return true
-		}
-		switch trimmed {
-		case "true", "yes", "1":
-			return true
-		case "false", "no", "0":
-			return false
-		default:
-			return false
-		}
+        if Int(trimmed) != 0 {
+            return true
+        }
+        switch trimmed {
+        case "true", "yes", "1":
+            return true
+        case "false", "no", "0":
+            return false
+        default:
+            return false
+        }
     }
-
+    
     func toDate(_ format: String = "yyyy-MM-dd") -> Date? {
         return dateFormatter(format).date(from: self) as Date?
     }
@@ -329,68 +336,68 @@ public extension String {
             return self[index]
         }
     }
-
-//	/// get the left part of the string before the index
-//	func left(_ range:Range<String.Index>?) -> String {
-//		return self.substring(to: (range?.lowerBound)!)
-//	}
-//	/// get the right part of the string after the index
-//	func right(_ range:Range<String.Index>?) -> String {
-//		return self.substring(from: self.index((range?.lowerBound)!, offsetBy:1))
-//	}
-	
-	/// The first index of the given string
-	public func indexRaw(of str: String, after: Int = 0, options: String.CompareOptions = .literal, locale: Locale? = nil) -> String.Index? {
-		guard str.length > 0 else {
-			// Can't look for nothing
-			return nil
-		}
-		guard (str.length + after) <= self.length else {
-			// Make sure the string you're searching for will actually fit
-			return nil
-		}
-		
-		let startRange = self.index(self.startIndex, offsetBy: after)..<self.endIndex
-		return self.range(of: str, options: options.removing(.backwards), range: startRange, locale: locale)?.lowerBound
-	}
-	
-	public func index(of str: String, after: Int = 0, options: String.CompareOptions = .literal, locale: Locale? = nil) -> Int {
-		guard let index = indexRaw(of: str, after: after, options: options, locale: locale) else {
-			return -1
-		}
-		return self.distance(from: self.startIndex, to: index)
-	}
-	
-	/// The last index of the given string
-	public func lastIndexRaw(of str: String, before: Int = 0, options: String.CompareOptions = .literal, locale: Locale? = nil) -> String.Index? {
-		guard str.length > 0 else {
-			// Can't look for nothing
-			return nil
-		}
-		guard (str.length + before) <= self.length else {
-			// Make sure the string you're searching for will actually fit
-			return nil
-		}
-		
-		let startRange = self.startIndex..<self.index(self.endIndex, offsetBy: -before)
-		return self.range(of: str, options: options.inserting(.backwards), range: startRange, locale: locale)?.lowerBound
-	}
-	
-	public func lastIndex(of str: String, before: Int = 0, options: String.CompareOptions = .literal, locale: Locale? = nil) -> Int {
-		guard let index = lastIndexRaw(of: str, before: before, options: options, locale: locale) else {
-			return -1
-		}
-		return self.distance(from: self.startIndex, to: index)
-	}
-
+    
+    //	/// get the left part of the string before the index
+    //	func left(_ range:Range<String.Index>?) -> String {
+    //		return self.substring(to: (range?.lowerBound)!)
+    //	}
+    //	/// get the right part of the string after the index
+    //	func right(_ range:Range<String.Index>?) -> String {
+    //		return self.substring(from: self.index((range?.lowerBound)!, offsetBy:1))
+    //	}
+    
+    /// The first index of the given string
+    public func indexRaw(of str: String, after: Int = 0, options: String.CompareOptions = .literal, locale: Locale? = nil) -> String.Index? {
+        guard str.length > 0 else {
+            // Can't look for nothing
+            return nil
+        }
+        guard (str.length + after) <= self.length else {
+            // Make sure the string you're searching for will actually fit
+            return nil
+        }
+        
+        let startRange = self.index(self.startIndex, offsetBy: after)..<self.endIndex
+        return self.range(of: str, options: options.removing(.backwards), range: startRange, locale: locale)?.lowerBound
+    }
+    
+    public func index(of str: String, after: Int = 0, options: String.CompareOptions = .literal, locale: Locale? = nil) -> Int {
+        guard let index = indexRaw(of: str, after: after, options: options, locale: locale) else {
+            return -1
+        }
+        return self.distance(from: self.startIndex, to: index)
+    }
+    
+    /// The last index of the given string
+    public func lastIndexRaw(of str: String, before: Int = 0, options: String.CompareOptions = .literal, locale: Locale? = nil) -> String.Index? {
+        guard str.length > 0 else {
+            // Can't look for nothing
+            return nil
+        }
+        guard (str.length + before) <= self.length else {
+            // Make sure the string you're searching for will actually fit
+            return nil
+        }
+        
+        let startRange = self.startIndex..<self.index(self.endIndex, offsetBy: -before)
+        return self.range(of: str, options: options.inserting(.backwards), range: startRange, locale: locale)?.lowerBound
+    }
+    
+    public func lastIndex(of str: String, before: Int = 0, options: String.CompareOptions = .literal, locale: Locale? = nil) -> Int {
+        guard let index = lastIndexRaw(of: str, before: before, options: options, locale: locale) else {
+            return -1
+        }
+        return self.distance(from: self.startIndex, to: index)
+    }
+    
 }
 
 private enum ThreadLocalIdentifier {
     case dateFormatter(String)
-
+    
     case defaultNumberFormatter
     case localeNumberFormatter(Locale)
-
+    
     var objcDictKey: String {
         switch self {
         case .dateFormatter(let format):
@@ -404,18 +411,18 @@ private enum ThreadLocalIdentifier {
 }
 
 private func threadLocalInstance<T: AnyObject>(_ identifier: ThreadLocalIdentifier, initialValue: @autoclosure () -> T) -> T {
-	#if os(Linux)
-		var storage = Thread.current.threadDictionary
-	#else
-		let storage = Thread.current.threadDictionary
-	#endif
+    #if os(Linux)
+        var storage = Thread.current.threadDictionary
+    #else
+        let storage = Thread.current.threadDictionary
+    #endif
     let k = identifier.objcDictKey
-
+    
     let instance: T = storage[k] as? T ?? initialValue()
     if storage[k] == nil {
         storage[k] = instance
     }
-
+    
     return instance
 }
 
@@ -441,42 +448,42 @@ private func localeNumberFormatter(_ locale: Locale) -> NumberFormatter {
 
 /// Add the `inserting` and `removing` functions
 private extension OptionSet where Element == Self {
-	/// Duplicate the set and insert the given option
-	func inserting(_ newMember: Self) -> Self {
-		var opts = self
-		opts.insert(newMember)
-		return opts
-	}
-	
-	/// Duplicate the set and remove the given option
-	func removing(_ member: Self) -> Self {
-		var opts = self
-		opts.remove(member)
-		return opts
-	}
+    /// Duplicate the set and insert the given option
+    func inserting(_ newMember: Self) -> Self {
+        var opts = self
+        opts.insert(newMember)
+        return opts
+    }
+    
+    /// Duplicate the set and remove the given option
+    func removing(_ member: Self) -> Self {
+        var opts = self
+        opts.remove(member)
+        return opts
+    }
 }
 
 public extension String {
-
-	func isValidEmail() -> Bool {
-		#if os(Linux) && !swift(>=3.1)
-			let regex = try? RegularExpression(pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", options: .caseInsensitive)
-		#else
-			let regex = try? NSRegularExpression(pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", options: .caseInsensitive)
-		#endif
-		return regex?.firstMatch(in: self, options: [], range: NSMakeRange(0, self.characters.count)) != nil
-	}
-
-
-	/// Encode a String to Base64
-	func toBase64() -> String {
-		return Data(self.utf8).base64EncodedString()
-	}
-
-	/// Decode a String from Base64. Returns nil if unsuccessful.
-	func fromBase64() -> String? {
-		guard let data = Data(base64Encoded: self) else { return nil }
-		return String(data: data, encoding: .utf8)
-	}
+    
+    func isValidEmail() -> Bool {
+        #if os(Linux) && !swift(>=3.1)
+            let regex = try? RegularExpression(pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", options: .caseInsensitive)
+        #else
+            let regex = try? NSRegularExpression(pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", options: .caseInsensitive)
+        #endif
+        return regex?.firstMatch(in: self, options: [], range: NSMakeRange(0, self.characters.count)) != nil
+    }
+    
+    
+    /// Encode a String to Base64
+    func toBase64() -> String {
+        return Data(self.utf8).base64EncodedString()
+    }
+    
+    /// Decode a String from Base64. Returns nil if unsuccessful.
+    func fromBase64() -> String? {
+        guard let data = Data(base64Encoded: self) else { return nil }
+        return String(data: data, encoding: .utf8)
+    }
 }
 
