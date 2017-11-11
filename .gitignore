@@ -70,3 +70,7 @@ docs/
 
 *.xcodeproj
 Package.pins
+Package.resolved
+.package_lin.pins
+.package_lin.resolved
+.build_lin
